@@ -15,7 +15,7 @@ public class Algebra {
    		System.out.println(pow(3,5));      // 3^5
    		System.out.println(div(12,3));   // 12 / 3    
    		System.out.println(div(5,5));    // 5 / 5  
-   	    System.out.println(div(25,7));   // 25 / 7 =3
+   	    System.out.println(div(7,2));   // 25 / 7 =3
    		System.out.println(mod(25,7));   // 25 % 7 = 4
    		System.out.println(mod(120,6));  // 120 % 6    
    		System.out.println(sqrt(36));
@@ -69,33 +69,33 @@ public class Algebra {
 			return 0;
 		}
 		int n  = 1; 
-		while (x1 > times(x2, n)){
+		while (x1 >= times(x2, n)){
 			n++;
 		}
-		return n;
+		return n-1;
 		}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
 		
-		int n=0; 
-		while (times(n, x2) < x1)
+		if (x1==0 || x2==0)
+        {
+            return 0;
+        }
+		int mod=x1; 
+		while (mod>=x2)
 		{
-			n++;
+			mod=minus(mod,x2);
 		}
-		if (times(n, x2) == x1){
-			return 0; 
+		return mod;
 		}
-		else {
-			return (minus(times(n, x2), x1));
-			}
-		}
+		
 		
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
 		int n = 1;
-		while (pow(n, 2) != x){
+		while (pow(n, 2) < x){
 			n++;
 		}
 		return n;
