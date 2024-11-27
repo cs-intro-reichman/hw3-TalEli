@@ -27,19 +27,32 @@ public class LoanCalc {
 
 	// Computes the ending balance of a loan, given the loan amount, the periodical
 	// interest rate (as a percentage), the number of periods (n), and the periodical payment.
-	private static double endBalance(double loan, double rate, int n, double payment) {	
-		// Replace the following statement with your code
-		return 0;
-	}
 	
+	private static double endBalance(double loan,double rate,int n,double payment)
+     {
+        
+        for (int i=0;i<n;i++){
+            loan-=payment;
+            loan*=1+(rate/100);
+        }
+        return loan;
+     }
 	// Uses sequential search to compute an approximation of the periodical payment
 	// that will bring the ending balance of a loan close to 0.
 	// Given: the sum of the loan, the periodical interest rate (as a percentage),
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
-		// Replace the following statement with your code
-		return 0;
+		double amount=loan/n;
+        double owes=endBalance(loan, rate, n, amount);
+        iterationCounter=0;
+        while (owes>0){
+            amount+=epsilon;
+            owes=endBalance(loan, rate, n, amount);
+            iterationCounter++;
+        }
+        
+        return amount;
     }
     
     // Uses bisection search to compute an approximation of the periodical payment 
@@ -48,7 +61,22 @@ public class LoanCalc {
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
-        // Replace the following statement with your code
-		return 0;
+        double low=loan/n;
+        double high=loan;
+        double guess=(low+high)/2;
+        iterationCounter=0;
+        while (high-low>epsilon)
+        {
+            if (endBalance(loan, rate, n, guess)>0){
+                low=guess;
+            }
+            else{
+                high=guess;
+            }
+            guess=(low+high)/2;
+            iterationCounter++;
+        }
+       
+        return guess;
     }
 }
