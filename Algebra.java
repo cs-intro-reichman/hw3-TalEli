@@ -95,7 +95,7 @@ public class Algebra {
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
 		int n = 1;
-		while (pow(n, 2) <= x){
+		while (pow(n, 2) != x){
 			n++;
 		}
 		return n;
